@@ -10,3 +10,6 @@ spec:
       image: node:lts
       command: ["tail"]
       args: ["-f", "/dev/null"]
+      envFrom:
+        - configMapRef:
+          name: mongodb-configmap
