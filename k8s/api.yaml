@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cloudweave-api
+  labels:
+    app: cloudweave-api
+spec:
+  containers:
+    - name: graphql-container
+      image: node:lts
+      command: ["tail"]
+      args: ["-f", "/dev/null"]
