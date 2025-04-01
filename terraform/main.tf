@@ -191,3 +191,7 @@ resource "aws_codepipeline" "cloudweave-codepipeline" {
     }
   }
 }
+
+resource "aws_ecr_repository" "cloudweave_ecr" {
+  name = "cloudweave"
+}
