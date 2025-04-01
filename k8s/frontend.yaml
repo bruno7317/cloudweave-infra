@@ -7,8 +7,6 @@ metadata:
 spec:
   containers:
     - name: frontend-container
-      image: node:lts
-      command: ["tail"]
-      args: ["-f", "/dev/null"]
+      image: bruno7317/cloudweave-frontend:1.0
       ports:
-        - containerPort: 80
+        - containerPort: 3000
