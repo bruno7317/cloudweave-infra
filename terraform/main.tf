@@ -12,7 +12,7 @@ provider "aws" {
   region  = var.region
 }
 
-resource "aws_s3_bucket" "cloudweave_s3_bucket" {
+resource "aws_s3_bucket" "cloudweave-s3-bucket" {
   bucket_prefix = "cloudweave"
   force_destroy = true
 }
@@ -41,7 +41,7 @@ resource "aws_iam_policy" "allow_s3" {
         "s3:PutObject",
         "s3:GetObject"
       ]
-      Resource = "${aws_s3_bucket.cloudweave_s3_bucket.arn}/*"
+      Resource = "${aws_s3_bucket.cloudweave-s3-bucket.arn}/*"
     }]
 
   })
@@ -163,7 +163,7 @@ resource "aws_codebuild_project" "cloudweave" {
 
     environment_variable {
       name  = "REPOSITORY"
-      value = aws_ecr_repository.cloudweave_ecr.name
+      value = aws_ecr_repository.cloudweave-ecr.name
     }
   }
 }
@@ -172,7 +172,7 @@ resource "aws_codepipeline" "cloudweave-codepipeline" {
   role_arn = aws_iam_role.codepipeline_role.arn
   name     = "cloudweave-codepipeline"
   artifact_store {
-    location = aws_s3_bucket.cloudweave_s3_bucket.bucket
+    location = aws_s3_bucket.cloudweave-s3-bucket.bucket
     type     = "S3"
   }
   stage {
@@ -207,6 +207,25 @@ resource "aws_codepipeline" "cloudweave-codepipeline" {
   }
 }
 
-resource "aws_ecr_repository" "cloudweave_ecr" {
+resource "aws_ecr_repository" "cloudweave-ecr" {
   name = "cloudweave-frontend"
+}
+
+resource "aws_iam_policy" "allow-ecr" {
+  name_prefix = "allow_ecr"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "ecr:GetAuthorizationToken"
+      ]
+      Resource = "*"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach-codebuild-ecr-policy" {
+  role       = aws_iam_role.codebuild_role.name
+  policy_arn = aws_iam_policy.allow-ecr.arn
 }
