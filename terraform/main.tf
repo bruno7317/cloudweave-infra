@@ -218,7 +218,12 @@ resource "aws_iam_policy" "allow-ecr" {
     Statement = [{
       Effect = "Allow"
       Action = [
-        "ecr:GetAuthorizationToken"
+        "ecr:GetAuthorizationToken",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:PutImage"
       ]
       Resource = "*"
     }]
