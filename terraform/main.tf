@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "ca-central-1"
+  region  = var.region
 }
 
 resource "aws_s3_bucket" "cloudweave_s3_bucket" {
@@ -67,7 +67,7 @@ resource "aws_iam_policy" "allow_codestar-connections" {
 }
 
 resource "aws_iam_role_policy_attachment" "attach-codepipeline-codestar-connections-policy" {
-  role = aws_iam_role.codepipeline_role.name
+  role       = aws_iam_role.codepipeline_role.name
   policy_arn = aws_iam_policy.allow_codestar-connections.arn
 }
 
@@ -87,7 +87,7 @@ resource "aws_iam_policy" "allow_codebuild" {
 }
 
 resource "aws_iam_role_policy_attachment" "attach-codepipeline-codebuild-policy" {
-  role = aws_iam_role.codepipeline_role.name
+  role       = aws_iam_role.codepipeline_role.name
   policy_arn = aws_iam_policy.allow_codebuild.arn
 }
 
@@ -122,12 +122,12 @@ resource "aws_iam_policy" "allow_logs" {
 }
 
 resource "aws_iam_role_policy_attachment" "attach-codebuild-logs-policy" {
-  role = aws_iam_role.codebuild_role.name
-  policy_arn = aws_iam_policy.allow_logs.arn  
+  role       = aws_iam_role.codebuild_role.name
+  policy_arn = aws_iam_policy.allow_logs.arn
 }
 
 resource "aws_iam_role_policy_attachment" "attach-codebuild-codebuild-policy" {
-  role = aws_iam_role.codebuild_role.name
+  role       = aws_iam_role.codebuild_role.name
   policy_arn = aws_iam_policy.allow_codebuild.arn
 }
 
@@ -137,7 +137,7 @@ resource "aws_iam_role_policy_attachment" "attach-codebuild-s3-policy" {
 }
 
 resource "aws_codebuild_project" "cloudweave" {
-  name = "cloudweave_build"
+  name         = "cloudweave_build"
   service_role = aws_iam_role.codebuild_role.arn
 
   artifacts {
@@ -147,9 +147,24 @@ resource "aws_codebuild_project" "cloudweave" {
     type = "CODEPIPELINE"
   }
   environment {
-    type = "LINUX_CONTAINER"
-    image = "aws/codebuild/standard:5.0"
+    type         = "LINUX_CONTAINER"
+    image        = "aws/codebuild/standard:5.0"
     compute_type = "BUILD_GENERAL1_SMALL"
+
+    environment_variable {
+      name  = "AWS_REGION"
+      value = var.region
+    }
+
+    environment_variable {
+      name  = "ACCOUNT_ID"
+      value = var.account_id
+    }
+
+    environment_variable {
+      name  = "REPOSITORY"
+      value = aws_ecr_repository.cloudweave_ecr.name
+    }
   }
 }
 
@@ -179,12 +194,12 @@ resource "aws_codepipeline" "cloudweave-codepipeline" {
   stage {
     name = "Build"
     action {
-      name             = "BuildAction"
-      category         = "Build"
-      version          = "1"
-      owner            = "AWS"
-      provider         = "CodeBuild"
-      input_artifacts  = ["SourceOutput"]
+      name            = "BuildAction"
+      category        = "Build"
+      version         = "1"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      input_artifacts = ["SourceOutput"]
       configuration = {
         ProjectName = aws_codebuild_project.cloudweave.name
       }
@@ -193,5 +208,5 @@ resource "aws_codepipeline" "cloudweave-codepipeline" {
 }
 
 resource "aws_ecr_repository" "cloudweave_ecr" {
-  name = "cloudweave"
+  name = "cloudweave-frontend"
 }

@@ -12,3 +12,13 @@ variable "github_main_branch" {
   type    = string
   default = "master"
 }
+
+variable "account_id" {
+  type    = string
+  default = "373609202462"
+}
+
+variable "region" {
+  type    = string
+  default = "ca-central-1"
+}
