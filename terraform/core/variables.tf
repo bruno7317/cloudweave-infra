@@ -12,6 +12,14 @@ variable "pipelines" {
     api = {
       app_name             = "cloudweave-api"
       github_repository_id = "bruno7317/cloudweave-api"
+    },
+    mongo-api = {
+      app_name             = "mongo-api"
+      github_repository_id = "bruno7317/cloudweave-mongo-api"
+    },
+    postgres-api = {
+      app_name             = "postgres-api"
+      github_repository_id = "bruno7317/cloudweave-postgres-api"
     }
   }
 }

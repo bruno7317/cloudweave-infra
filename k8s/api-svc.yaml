@@ -6,3 +6,6 @@ spec:
   type: ClusterIP
   selector:
     app: cloudweave-api
+  ports:
+    - port: 8000
+      targetPort: 8000

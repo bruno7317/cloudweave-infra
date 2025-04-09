@@ -6,7 +6,7 @@ metadata:
     app: cloudweave-api
 spec:
   containers:
-    - name: graphql-container
-      image: node:lts
-      command: ["tail"]
-      args: ["-f", "/dev/null"]
+    - name: api-container
+      image: cloudweave/cloudweave-api:1.0
+      ports:
+        - containerPort: 8000
