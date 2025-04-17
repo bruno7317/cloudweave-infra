@@ -7,9 +7,9 @@ metadata:
 spec:
   containers:
     - name: postgresdb-container
-      image: node:lts
-      command: ["tail"]
-      args: ["-f", "/dev/null"]
+      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api:1.0
+      ports:
+        - containerPort: 6000
       envFrom:
         - configMapRef:
           name: postgresdb-configmap

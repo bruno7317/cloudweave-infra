@@ -7,9 +7,9 @@ metadata:
 spec:
   containers:
     - name: mongodb-container
-      image: node:lts
-      command: ["tail"]
-      args: ["-f", "/dev/null"]
+      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api:1.0
+      ports:
+        - containerPort: 7000
       envFrom:
         - configMapRef:
           name: mongodb-configmap
