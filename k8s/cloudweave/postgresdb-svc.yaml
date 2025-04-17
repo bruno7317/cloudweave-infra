@@ -6,3 +6,6 @@ spec:
   type: ClusterIP
   selector:
     app: postgresdb-api
+  ports:
+    - port: 6000
+      targetPort: 6000
