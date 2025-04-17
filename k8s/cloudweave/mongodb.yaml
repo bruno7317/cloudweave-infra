@@ -12,4 +12,4 @@ spec:
         - containerPort: 7000
       envFrom:
         - configMapRef:
-          name: mongodb-configmap
+            name: mongodb-configmap
