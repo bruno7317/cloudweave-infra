@@ -119,7 +119,7 @@ resource "aws_eks_node_group" "node_group" {
     aws_subnet.eks-subnet-2.id
   ]
 
-  instance_types = ["t3.small"]
+  instance_types = ["t3.medium"]
   scaling_config {
     desired_size = 1
     min_size     = 1
