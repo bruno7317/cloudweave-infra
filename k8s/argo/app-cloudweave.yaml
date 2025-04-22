@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: cloudweave
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/postgres-api.update-strategy: digest
+    argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   project: default
   source:

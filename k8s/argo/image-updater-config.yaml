@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-image-updater-config
+  namespace: argocd
+data:
+  config.yaml: |
+    git:
+      writeBranch: master
+      commitUser: ArgoCD Image Updater
+      commitEmail: image-updater@cloudweave.local
+      credentialSecret: argocd-image-updater-secret

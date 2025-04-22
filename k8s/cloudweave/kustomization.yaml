@@ -1,0 +1,22 @@
+resources:
+  - api.yaml
+  - api-svc.yaml
+  - frontend.yaml
+  - frontend-svc.yaml
+  - mongodb.yaml
+  - mongodb-svc.yaml
+  - mongodb-configmap.yaml
+  - postgresdb.yaml
+  - postgresdb-svc.yaml
+  - postgresdb-configmap.yaml
+  - namespace.yaml
+
+images:
+  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-api
+    newTag: latest
+  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend
+    newTag: latest
+  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api
+    newTag: latest
+  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api
+    newTag: latest
