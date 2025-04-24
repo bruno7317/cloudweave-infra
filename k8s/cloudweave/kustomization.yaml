@@ -10,9 +10,3 @@ resources:
   - postgresdb-svc.yaml
   - postgresdb-configmap.yaml
   - namespace.yaml
-
-images:
-  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-api
-  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend
-  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api
-  - name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api
