@@ -4,6 +4,9 @@ metadata:
   name: cloudweave
   namespace: argocd
   annotations:
+    argocd-image-updater.argoproj.io/cloudweave-api.update-strategy: digest
+    argocd-image-updater.argoproj.io/cloudweave-frontend.update-strategy: digest
+    argocd-image-updater.argoproj.io/mongo-api.update-strategy: digest
     argocd-image-updater.argoproj.io/postgres-api.update-strategy: digest
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
@@ -12,6 +15,7 @@ spec:
     repoURL: https://github.com/bruno7317/cloudweave-infra
     targetRevision: master
     path: k8s/cloudweave
+    kustomize: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: cloudweave
