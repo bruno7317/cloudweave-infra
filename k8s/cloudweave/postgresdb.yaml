@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: postgresdb-container
-      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api
+      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api:latest
       ports:
         - containerPort: 6000
       envFrom:

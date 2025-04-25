@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: api-container
-      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-api
+      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-api:latest
       ports:
         - containerPort: 8000

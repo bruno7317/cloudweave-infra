@@ -8,6 +8,6 @@ metadata:
 spec:
   containers:
     - name: frontend-container
-      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend
+      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend:latest
       ports:
         - containerPort: 3000
