@@ -1,15 +1,43 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: postgresdb-api
   labels:
     app: postgresdb-api
 spec:
-  containers:
-    - name: postgresdb-container
-      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api:latest
-      ports:
-        - containerPort: 6000
-      envFrom:
-        - configMapRef:
-            name: postgresdb-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresdb-api
+  template:
+    metadata:
+      labels:
+        app: postgresdb-api
+    spec:
+      containers:
+        - name: postgresdb-container
+          image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api:latest
+          ports:
+            - containerPort: 6000
+          envFrom:
+            - configMapRef:
+                name: postgresdb-configmap
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 6000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 6000
+            initialDelaySeconds: 10
+            periodSeconds: 20

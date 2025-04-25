@@ -7,8 +7,8 @@ metadata:
     argocd-image-updater.argoproj.io/image-list: |
       cloudweave-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-api
       cloudweave-frontend=373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend
-      mongo-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api
-      postgres-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api
+      mongodb-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api
+      postgresdb-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api
     argocd-image-updater.argoproj.io/cloudweave-api.update-strategy: digest
     argocd-image-updater.argoproj.io/cloudweave-frontend.update-strategy: digest
     argocd-image-updater.argoproj.io/mongo-api.update-strategy: digest

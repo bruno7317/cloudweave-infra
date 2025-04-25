@@ -1,13 +1,41 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: cloudweave-frontend
   namespace: default
   labels:
     app: cloudweave-frontend
 spec:
-  containers:
-    - name: frontend-container
-      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend:latest
-      ports:
-        - containerPort: 3000
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudweave-frontend
+  template:
+    metadata:
+      labels:
+        app: cloudweave-frontend
+    spec:
+      containers:
+        - name: frontend-container
+          image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 20

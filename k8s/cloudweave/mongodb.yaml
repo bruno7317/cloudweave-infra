@@ -1,15 +1,43 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: mongodb-api
   labels:
     app: mongodb-api
 spec:
-  containers:
-    - name: mongodb-container
-      image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api:latest
-      ports:
-        - containerPort: 7000
-      envFrom:
-        - configMapRef:
-            name: mongodb-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb-api
+  template:
+    metadata:
+      labels:
+        app: mongodb-api
+    spec:
+      containers:
+        - name: mongodb-container
+          image: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api:latest
+          ports:
+            - containerPort: 7000
+          envFrom:
+            - configMapRef:
+                name: mongodb-configmap
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7000
+            initialDelaySeconds: 10
+            periodSeconds: 20
