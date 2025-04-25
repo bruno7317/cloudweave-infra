@@ -130,6 +130,7 @@ spec:
       containers:
       - args:
         - run
+        - --registries-conf-path=/app/registries/registries.conf
         env:
         - name: APPLICATIONS_API
           valueFrom:
@@ -167,6 +168,11 @@ spec:
               key: argocd.token
               name: argocd-image-updater-secret
               optional: true
+        - name: AWS_ECR_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: aws-ecr-secret
+              key: AWS_ECR_PASSWORD
         - name: IMAGE_UPDATER_LOGLEVEL
           valueFrom:
             configMapKeyRef:
@@ -254,6 +260,9 @@ spec:
           name: ssh-signing-key
           readOnly: true
           subPath: sshPrivateKey
+        - mountPath: /app/registries/registries.conf
+          name: ecr-registries-config
+          subPath: registries.conf
       serviceAccountName: argocd-image-updater
       volumes:
       - configMap:
@@ -277,5 +286,8 @@ spec:
         secret:
           optional: true
           secretName: ssh-git-creds
+      - name: ecr-registries-config
+        configMap:
+          name: argocd-image-updater-registries
       - emptyDir: {}
         name: tmp

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-image-updater-registries
+  namespace: argocd
+data:
+  registries.conf: |
+    registries:
+      - name: aws-ecr
+        api_url: https://373609202462.dkr.ecr.ca-central-1.amazonaws.com
+        prefix: 373609202462.dkr.ecr.ca-central-1.amazonaws.com
+        credentials:
+          username: AWS
+          password: "$AWS_ECR_PASSWORD"

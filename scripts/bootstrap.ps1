@@ -4,6 +4,8 @@ $argoPath = Join-Path $PSScriptRoot "..\k8s\argo"
 
 kubectl apply -f "$argoPath\namespace.yaml"
 kubectl apply -f "$argoPath\git-credentials.yaml"
+kubectl apply -f "$argoPath\aws-ecr-credentials.yaml"
+kubectl apply -f "$argoPath\registries-config.yaml"
 kubectl apply -f "$argoPath\image-updater-config.yaml"
 kubectl apply -f "$argoPath\repo-public.yaml"
 
