@@ -14,7 +14,7 @@ provider "aws" {
 
 module "cloudweave_pipeline" {
   for_each = var.pipelines
-  source   = "./modules/pipeline"
+  source   = "./pipeline"
 
   app_name             = each.value.app_name
   github_repository_id = each.value.github_repository_id

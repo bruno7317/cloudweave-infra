@@ -168,11 +168,6 @@ spec:
               key: argocd.token
               name: argocd-image-updater-secret
               optional: true
-        - name: AWS_ECR_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: aws-ecr-secret
-              key: AWS_ECR_PASSWORD
         - name: IMAGE_UPDATER_LOGLEVEL
           valueFrom:
             configMapKeyRef:

@@ -9,4 +9,3 @@ data:
       - name: aws-ecr
         api_url: https://373609202462.dkr.ecr.ca-central-1.amazonaws.com
         prefix: 373609202462.dkr.ecr.ca-central-1.amazonaws.com
-        credentials: pullsecret:argocd/aws-ecr-secret
