@@ -4,19 +4,22 @@ metadata:
   name: cloudweave
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: |
-      cloudweave-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-api
-      cloudweave-frontend=373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend
-      mongodb-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api
-      postgresdb-api=373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api
-    argocd-image-updater.argoproj.io/cloudweave-api.update-strategy: digest
+    argocd-image-updater.argoproj.io/cloudweave-api.image-name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-api
     argocd-image-updater.argoproj.io/cloudweave-api.container-name: api-container
-    argocd-image-updater.argoproj.io/cloudweave-frontend.update-strategy: digest
+    argocd-image-updater.argoproj.io/cloudweave-api.update-strategy: digest
+
+    argocd-image-updater.argoproj.io/cloudweave-frontend.image-name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/cloudweave-frontend
     argocd-image-updater.argoproj.io/cloudweave-frontend.container-name: frontend-container
-    argocd-image-updater.argoproj.io/mongodb-api.update-strategy: digest
+    argocd-image-updater.argoproj.io/cloudweave-frontend.update-strategy: digest
+
+    argocd-image-updater.argoproj.io/mongodb-api.image-name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/mongo-api
     argocd-image-updater.argoproj.io/mongodb-api.container-name: mongodb-container
-    argocd-image-updater.argoproj.io/postgresdb-api.update-strategy: digest
+    argocd-image-updater.argoproj.io/mongodb-api.update-strategy: digest
+
+    argocd-image-updater.argoproj.io/postgresdb-api.image-name: 373609202462.dkr.ecr.ca-central-1.amazonaws.com/postgres-api
     argocd-image-updater.argoproj.io/postgresdb-api.container-name: postgresdb-container
+    argocd-image-updater.argoproj.io/postgresdb-api.update-strategy: digest
+    
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   project: default
