@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloudweave-frontend
-  namespace: default
+  namespace: cloudweave
   labels:
     app: cloudweave-frontend
 spec:
